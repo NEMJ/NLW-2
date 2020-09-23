@@ -1,0 +1,72 @@
+:root { 
+  /* Variáveis em CSS */
+  --color-background: #F0F0F7;
+  --color-primary-lighter: #9871F5;
+  --color-primary-light: #916BEA;
+  --color-primary: #8257E5;
+  --color-primary-dark: #774DD6;
+  --color-primary-darker: #6842C2;
+  --color-secondary: #04D361;
+  --color-secondary-dark: #04BF58;
+  --color-title-in-primary: #FFFFFF;
+  --color-text-in-primary: #D4C2FF;
+  --color-text-title: #32264D;
+  --color-text-complement: #9C98A6;
+  --color-text-base: #6A6180;
+  --color-line-in-white: #E6E6F8;
+  --color-input-background: #F8F8FC;
+  --color-button-text: #FFFFFF;
+  --color-box-base: #FFFFFF;
+  --color-box-footer: #FAFAFC;
+  --color-small-info: #C1BCCC;
+
+  /* Tamanho Padrão de Fonte: 16px - 100% - 1rem 
+    REM -> root element (relativo ao root - raíz)
+  */
+  font-size: 60%; /* controle das medidas rem */
+}
+
+html, body {
+  height: 100vh; /* ViewPort Height -> Campo de visão da tela, independente de seu tamanho; relativo à altura*/
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  /* Quebra o padão do html de calcular o espaçamento a partir do conteúdo para que seja calculado a partir da borda */
+}
+
+body {
+  background-color: var(--color-background);
+  display: flex; /* Torna todo os elementos flexíveis à alterações de posicionamento.
+  Por padrão, a maioria das tags tem display block, que coloca um elemento em  baixo do outro */
+  align-items: center;
+  justify-content: center;
+}
+
+body,
+input,
+button,
+textarea {
+  font: 500 1.6rem Poppins ; /* Comando simplificado */
+  /*
+  font-weight: 500;
+  font-size: 1.6rem;
+  font-family: Popins;
+  */
+  color: var(--color-text-base);
+}
+
+#container {
+  width: 90vw; /* 
+  Independente do tamanho da tela, ele quebra a tela em 100 pedaços mas usa apenas 90 desses pedaços na horizontal
+  */
+  max-width: 700px; /* É o limite que o elemento pode alcançar a respeito da largura */
+}
+
+@media (min-width: 700px) {
+  :root {
+    font-size: 62.5%; /* todo 1rem será relativo a 10px*/
+  }
+}

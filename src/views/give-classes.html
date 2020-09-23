@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">  
+<head> <!-- Reesponsável por todas as configurações do documento -->
+  <meta charset="UTF-8"/> <!-- A tag META define atributos específicos de página -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Proffy | Sua Plataforma de Cursos Online</title>
+
+  <link rel="stylesheet" href="/styles/main.css"/>
+  <link rel="stylesheet" href="/styles/partials/header.css"/>
+  <link rel="stylesheet" href="/styles/partials/forms.css"/>
+  <link rel="stylesheet" href="/styles/partials/page-give-classes.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap"
+  rel="stylesheet"/>
+
+  <script src="/scripts/addField.js" defer></script>
+  
+</head>
+<body id="page-give-classes"> <!-- Responsável por todo conteúdo visível do documento -->
+  
+  <div id="container">
+    <header class="page-header"> <!-- Simboliza o conteúdo que fica na parte superior da página -->
+      <div class="top-bar-container">
+        <a href="/">
+          <img src="/images/icons/back.svg" alt="Voltar"/>
+        </a>
+        <img src="/images/logo.svg" alt="Proffy"/>
+      </div>
+      <div class="header-content">
+        <strong>Que incrível que você quer dar aulas.</strong>
+        <p>O primeiro passo é preencher esse formulário de inscrição</p>
+      </div>
+    </header>
+
+    <main> <!-- Simboliza o conteúdo principal da página, o seu corpo -->
+      <form action="/save-classes" id="create-class" method="POST"> <!-- Manda os dados sem aparecer na URL -->
+        <fieldset> <!-- Tag para agrupamento de Dados -->
+          <legend>Seus Dados</legend> <!-- O nome do agrupamento de Dados -->
+
+          <div class="input-block">
+            <label for="name">Nome Completo</label>
+            <input name="name" id="name" required/> <!-- O formulário não é enviado enquanto todos os campos com o REQUIRED não estiverem preenchidos -->
+          </div>
+
+          <div class="input-block">
+            <label for="avatar">Link da sua foto <small>(comece com https://)</small></label> <!-- A tag SMALL é simplesmente umm texto pequeno -->
+            <input name="avatar" id="avatar" type="url" required/> <!-- Esse input força o ususário a colocar uma url que precisa começar com https://. Caso contrário é informado um erro -->
+          </div>
+
+          <div class="input-block">
+            <label for="whatsapp">Whatsapp <small>(somente números)</small></label>
+            <input name="whatsapp" id="whatsapp" type="number" required/>
+          </div>
+
+          <div class="textarea-block">
+            <label for="bio">Biografia</label>
+            <textarea name="bio" id="bio" required></textarea> <!-- Caixa de texto multi-linha -->
+          </div>
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Sobre a aula</legend>
+          <div class="select-block">
+            <label for="subject"> Matéria</label>
+            <select name="subject" id="subject" required>
+              <option value="">Selecione uma opção</option>
+              {% for subject in subjects %}
+                <option value="{{loop.index}}">
+                  {{subject}}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="input-block">
+            <label for="cost"> Custo da sua hora/aula
+              <small>(R$)</small>
+            </label>
+            <input name="cost" type="cost" id="cost" type="number" required/>
+          </div>
+        </fieldset>
+
+        <fieldset id="schedule-items">
+          <legend>Horários disponíveis
+            <button type="button" id="add-time">+ Novo Horário</button>
+          </legend>
+
+          <div class="schedule-item">
+            <div class="select-block">
+              <label for="weekday">Dia da semana</label>
+              <select name="weekday[]" required> <!-- Os colchetes servem para que no back-end os valores sejamm agrupados -->
+                <option value="">Selecione uma opção</option>
+                {% for weekday in weekdays %}
+                  <option value="{{loop.index0}}">
+                    {{weekday}}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="input-block">
+              <label for="time_from">Das</label>
+              <input type="time" name="time_from[]" required/>
+            </div>
+
+            <div class="input-block">
+              <label for="time_to">Até</label>
+              <input type="time" name="time_to[]" required/>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <footer>
+        <p>
+          <img src="/images/icons/warning.svg" alt="Aviso importante"/>
+          Importante! <br> Preencha todos os dados
+        </p>
+        <button type="submit" form="create-class">Salvar cadastro</button> <!-- Como o botão do tipo 'submit' precisa estar dentro do formulário para mandar os dados, referenciamos o formulário com 'form' e seu 'id' -->
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>
